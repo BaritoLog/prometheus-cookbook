@@ -16,42 +16,14 @@ suites:
   - name: prometheus
     run_list:
       - recipe[prometheus::default]
+    verifier:
+      inspec_tests:
+        - test/integration/prometheus
     attributes: {
       "prometheus": {
         "jobs": {
           "test_job": {
-            "scrape_interval": "15s",
-            "relabel_configs": [
-              {
-                "source_labels": "__address__",
-                "regex": "(.*)(:80)?",
-                "target_label": "__param_target",
-                "replacement": "${1}"
-              },
-              {
-                "source_labels": "__param_target",
-                "regex": "(.*)",
-                "target_label": "instance",
-                "replacement": "${1}"
-              }
-            ]
-          },
-          "consul_job": {
-            "scrape_interval": "15s",
-            "consul_inventory": {
-              "server": "localhost:8500",
-              "services": [
-                "node_exporter"
-              ]
-            },
-            "relabel_configs": [
-              {
-                "target_label": "dc",
-                "source_labels": "__meta_consul_dc",
-                "regex": "(.*)",
-                "replacement": "${1}"
-              }
-            ]
+            "scrape_interval": "15s"
           }
         }
       }
