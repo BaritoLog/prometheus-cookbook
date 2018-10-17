@@ -43,6 +43,7 @@ systemd_unit "pushgateway.service" do
             [Service]
             ExecStart=/bin/bash -ce 'exec #{node["pushgateway"]["binary"]} >> "#{node["pushgateway"]["log_dir"]}/pushgateway.log" 2>&1'
             User=#{node["prometheus"]["user"]}
+            Restart=always
 
             [Install]
             WantedBy=multi-user.target

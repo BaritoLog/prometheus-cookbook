@@ -85,3 +85,36 @@ suites:
     verifier:
       inspec_tests:
         - test/integration/pushgateway
+  - name: alertmanager
+    run_list:
+      - recipe[prometheus::alertmanager]
+    verifier:
+      inspec_tests:
+        - test/integration/alertmanager
+    attributes: {
+      "alertmanager": {
+        "receivers": [
+          {
+            "name": "slack",
+            "slack_configs": [
+              {
+                "api_url": "https://api.slack.com",
+                "channel": "#alerts",
+                "send_resolved": true,
+              }
+            ]
+          }
+        ],
+        "route": {
+          "group_by": [
+            "alertname",
+            "cluster",
+            "service",
+          ],
+          "group_interval": "5m",
+          "group_wait": "30s",
+          "receiver": "slack",
+          "repeat_interval": "4h"
+        }
+      }
+    }
