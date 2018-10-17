@@ -21,10 +21,67 @@ suites:
         - test/integration/prometheus
     attributes: {
       "prometheus": {
+        "alerting": {
+          "alertmanagers": [
+            {
+              "scheme": "http",
+              "static_configs": [
+                {
+                  "targets": ["localhost:9093"],
+                }
+              ]
+            }
+          ],
+        },
         "jobs": {
+          "prometheus_job": {
+            "metrics_path": "/metrics",
+            "static_configs": [
+              {
+                "targets": ["localhost:9090"],
+              }
+            ]
+          },
+          "consul_job": {
+            "scrape_interval": "15s",
+            "consul_sd_configs": [
+              {
+                "server": "localhost:8500",
+                "services": ["node_exporter"]
+              }
+            ],
+            "relabel_configs": [
+              {
+                "source_labels": ["__meta_consul_dc"],
+                "target_label": "dc",
+                "regex": "(.*)",
+                "replacement": "${1}"
+              }
+            ]
+          },
           "test_job": {
-            "scrape_interval": "15s"
+            "scrape_interval": "15s",
+            "relabel_configs": [
+              {
+                "source_labels": ["__address__"],
+                "target_label": "__param_target",
+                "regex": "(.*)(:80)?",
+                "replacement": "${1}"
+              },
+              {
+                "source_labels": ["__param_target"],
+                "regex": "(.*)",
+                "target_label": "instance",
+                "replacement": "${1}"
+              }
+            ]
           }
         }
       }
     }
+  - name: pushgateway
+    run_list:
+      - recipe[prometheus::pushgateway]
+    verifier:
+      inspec_tests:
+        - test/integration/pushgateway

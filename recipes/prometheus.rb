@@ -76,17 +76,7 @@ config = {
     "external_labels" => node["prometheus"]["external_labels"],
   },
   "rule_files" => node["prometheus"]["rule_files"],
-  "alerting" => {
-    "alertmanagers" => [
-      {
-        "file_sd_configs" => [
-          {
-            "files" => [node["prometheus"]["alertmanager"]["inventory"]],
-          },
-        ],
-      },
-    ],
-  },
+  "alerting" => node["prometheus"]["alerting"],
   "scrape_configs" => parse_jobs(node["prometheus"]["jobs"], node["prometheus"]["inventory_dir"]),
 }
 

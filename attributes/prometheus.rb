@@ -52,9 +52,6 @@ default["prometheus"]["rule_files"] = [
   File.join(node["prometheus"]["rules_dir"], "/*.yml"),
 ]
 
-# Prometheus job configuration
+# Prometheus alerting & job configuration
+default["prometheus"]["alerting"] = []
 default["prometheus"]["jobs"] = []
-
-# Prometheus alertmanager configuration
-default["prometheus"]["alertmanager"]["port"] = "9093"
-default["prometheus"]["alertmanager"]["inventory"] = "#{node["prometheus"]["dir"]}/alertmanagers.yml"
