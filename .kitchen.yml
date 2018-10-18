@@ -81,12 +81,6 @@ suites:
         }
       }
     }
-  - name: pushgateway
-    run_list:
-      - recipe[prometheus::pushgateway]
-    verifier:
-      inspec_tests:
-        - test/integration/pushgateway
   - name: alertmanager
     run_list:
       - recipe[prometheus::alertmanager]
@@ -122,3 +116,15 @@ suites:
         }
       }
     }
+  - name: pushgateway
+    run_list:
+      - recipe[prometheus::pushgateway]
+    verifier:
+      inspec_tests:
+        - test/integration/pushgateway
+  - name: trickster
+    run_list:
+      - recipe[prometheus::trickster]
+    verifier:
+      inspec_tests:
+        - test/integration/trickster
