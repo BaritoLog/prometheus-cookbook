@@ -5,9 +5,9 @@
 # Copyright:: 2018, BaritoLog.
 
 # Pushgateway directory
-default["pushgateway"]["dir"] = "/opt/prometheus/pushgateway"
+default["pushgateway"]["dir"] = "#{node["prometheus"]["dir"]}/pushgateway"
+default["pushgateway"]["log_dir"] = "#{node["prometheus"]["log_dir"]}"
 default["pushgateway"]["binary"] = "#{node["pushgateway"]["dir"]}/pushgateway"
-default["pushgateway"]["log_dir"] = "#{node["prometheus"]["base_log_dir"]}/pushgateway"
 
 # Pushgateway version
 default["pushgateway"]["version"] = "0.5.2"

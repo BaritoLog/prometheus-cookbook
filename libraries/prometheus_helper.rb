@@ -22,64 +22,6 @@ module Gitlab
       config
     end
 
-    class NodeConfiguration
-      def initialize(hostname, ip, port, fqdn, is_public, prometheus_labels)
-        @hostname =  hostname
-        @ip =        ip
-        @port =      port
-        @fqdn =      fqdn
-        @is_public = is_public
-        @labels    = prometheus_labels || {}
-      end
-
-      def public_address
-        "#{@fqdn}:#{@port}"
-      end
-
-      def private_address
-        "#{@ip}:#{@port}"
-      end
-
-      def labels
-        lbls = { "fqdn" => @fqdn.to_s }.merge(@labels)
-        lbls["instance"] = public_address unless @is_public
-        lbls
-      end
-
-      def targets
-        if @is_public
-          [public_address]
-        else
-          [private_address]
-        end
-      end
-
-      def to_h
-        { "targets" => targets, "labels" => labels }
-      end
-    end
-
-    def generate_inventory_file(query, port, public_hosts)
-      nodes = query.map { |node|
-        first_ipv4_address = Gitlab.private_ips_for_node(node).first
-        if (first_ipv4_address || "").empty?
-          Chef::Log.warn("Node #{node['hostname']} does not have an ipv4 defined")
-          next
-        end
-        prometheus = node["prometheus"] || {}
-        NodeConfiguration.new(node["hostname"],
-                              first_ipv4_address,
-                              port,
-                              (node["fqdn"]).to_s,
-                              public_hosts.include?(node["fqdn"]),
-                              prometheus["labels"])
-      }.compact # Why are we compacting here? are we adding nils somehow?
-
-      nodes.inject([]) do |inventory, node|
-        inventory << node.to_h
-      end
-    end
-
     def hash_to_yaml(hash)
       mutable_hash = JSON.parse(hash.dup.to_json)
       mutable_hash.to_yaml

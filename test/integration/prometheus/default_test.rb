@@ -2,7 +2,7 @@ control "prometheus install" do
   impact 1.0
   title "Tests Prometheus Installation"
 
-  describe file("/opt/prometheus/prometheus/prometheus") do
+  describe file("/opt/prometheus/prometheus") do
     its("mode") { should cmp "0755" }
   end
 

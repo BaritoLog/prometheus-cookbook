@@ -1,6 +1,6 @@
 #
 # Cookbook:: prometheus
-# Recipe:: default
+# Recipe:: user
 #
 # Copyright:: 2018, BaritoLog.
 
@@ -8,7 +8,7 @@
 user node["prometheus"]["user"] do
   system true
   shell "/bin/false"
-  home "/opt/#{node['prometheus']['user']}"
+  home "/opt/#{node["prometheus"]["user"]}"
   not_if node["prometheus"]["user"] == "root"
 end
 
@@ -19,7 +19,7 @@ directory node["prometheus"]["dir"] do
   recursive true
 end
 
-directory node["prometheus"]["base_log_dir"] do
+directory node["prometheus"]["log_dir"] do
   owner node["prometheus"]["user"]
   group node["prometheus"]["group"]
   mode "0755"

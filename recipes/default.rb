@@ -29,39 +29,32 @@ ark ::File.basename(node["prometheus"]["dir"]) do
 end
 
 # Copy configuration from different repository
-directory "#{node["prometheus"]["dir"]}/runbooks" do
-  owner node["prometheus"]["user"]
-  group node["prometheus"]["group"]
-  mode "0755"
-  recursive true
-end
-
-git "#{node["prometheus"]["dir"]}/runbooks" do
-  repository node["prometheus"]["runbooks"]["git_http"]
+git "#{node["prometheus"]["dir"]}/#{node["prometheus"]["runbooks"]["repo_name"]}" do
+  repository node["prometheus"]["runbooks"]["repo_url"]
   revision node["prometheus"]["runbooks"]["branch"]
   action :sync
   notifies :restart, "service[prometheus]", :delayed
 end
 
-link node["prometheus"]["alerting_rules_dir"] do
-  to "#{node["prometheus"]["dir"]}/runbooks/alerts"
+link node["prometheus"]["config"]["rules_dir"] do
+  to "#{node["prometheus"]["dir"]}/#{node["prometheus"]["runbooks"]["repo_name"]}/#{node["prometheus"]["runbooks"]["dir"]}/rules"
   owner node["prometheus"]["user"]
   group node["prometheus"]["group"]
 end
 
-link node["prometheus"]["recording_rules_dir"] do
-  to "#{node["prometheus"]["dir"]}/runbooks/recordings"
+link node["prometheus"]["config"]["alerting_rules_dir"] do
+  to "#{node["prometheus"]["dir"]}/#{node["prometheus"]["runbooks"]["repo_name"]}/#{node["prometheus"]["runbooks"]["dir"]}/alerts"
   owner node["prometheus"]["user"]
   group node["prometheus"]["group"]
 end
 
-link node["prometheus"]["rules_dir"] do
-  to "#{node["prometheus"]["dir"]}/runbooks/rules"
+link node["prometheus"]["config"]["recording_rules_dir"] do
+  to "#{node["prometheus"]["dir"]}/#{node["prometheus"]["runbooks"]["repo_name"]}/#{node["prometheus"]["runbooks"]["dir"]}/recordings"
   owner node["prometheus"]["user"]
   group node["prometheus"]["group"]
 end
 
-directory node["prometheus"]["inventory_dir"] do
+directory node["prometheus"]["config"]["inventory_dir"] do
   owner node["prometheus"]["user"]
   group node["prometheus"]["group"]
   mode "0755"
@@ -70,14 +63,16 @@ end
 
 config = {
   "global" => {
-    "scrape_interval" => node["prometheus"]["scrape_interval"],
-    "scrape_timeout" => node["prometheus"]["scrape_timeout"],
-    "evaluation_interval" => node["prometheus"]["evaluation_interval"],
-    "external_labels" => node["prometheus"]["external_labels"],
+    "scrape_interval" => node["prometheus"]["config"]["scrape_interval"],
+    "scrape_timeout" => node["prometheus"]["config"]["scrape_timeout"],
+    "evaluation_interval" => node["prometheus"]["config"]["evaluation_interval"],
+    "external_labels" => node["prometheus"]["config"]["external_labels"],
   },
-  "rule_files" => node["prometheus"]["rule_files"],
-  "alerting" => node["prometheus"]["alerting"],
-  "scrape_configs" => parse_jobs(node["prometheus"]["jobs"], node["prometheus"]["inventory_dir"]),
+  "remote_write" => node["prometheus"]["config"]["remote_write"],
+  "remote_read" => node["prometheus"]["config"]["remote_read"],
+  "scrape_configs" => parse_jobs(node["prometheus"]["config"]["scrape_configs"], node["prometheus"]["config"]["inventory_dir"]),
+  "alerting" => node["prometheus"]["config"]["alerting"],
+  "rule_files" => node["prometheus"]["config"]["rule_files"],
 }
 
 file "Prometheus config" do
@@ -87,28 +82,6 @@ file "Prometheus config" do
   group node["prometheus"]["group"]
   mode "0644"
   notifies :restart, "service[prometheus]"
-end
-
-# Generate job inventory files.
-node["prometheus"]["jobs"].each do |name, conf|
-  public_hosts = conf["public_hosts"] || []
-  exporter_port = conf["exporter_port"] || 80
-
-  search_query = nil
-  search_query = [conf["role_name"]].flatten.map { |role_name| "roles:#{role_name}" }.join(" OR ") if conf["role_name"]
-  search_query = conf["chef_search"] if conf["chef_search"]
-  next if search_query.nil?
-
-  query = search(:node, search_query).sort! { |a, b| a[:fqdn] <=> b[:fqdn] }
-
-  inventory_filepath = File.join(node["prometheus"]["inventory_dir"], "#{conf["inventory_file_name"] || name}.yml")
-
-  file inventory_filepath do
-    content generate_inventory_file(query, exporter_port, public_hosts).to_yaml
-    owner node["prometheus"]["user"]
-    group node["prometheus"]["group"]
-    mode "0644"
-  end
 end
 
 systemd_unit "prometheus.service" do

@@ -36,11 +36,18 @@ end
 
 config = {
   "global" => {
-    "resolve_timeout" => node["alertmanager"]["resolve_timeout"],
+    "resolve_timeout" => node["alertmanager"]["config"]["resolve_timeout"],
+    "smtp_smarthost" => node["alertmanager"]["config"]["smtp_smarthost"],
+    "smtp_from" => node["alertmanager"]["config"]["smtp_from"],
+    "smtp_auth_username" => node["alertmanager"]["config"]["smtp_auth_username"],
+    "smtp_auth_password" => node["alertmanager"]["config"]["smtp_auth_password"],
+    "hipchat_auth_token" => node["alertmanager"]["config"]["hipchat_auth_token"],
+    "hipchat_api_url" => node["alertmanager"]["config"]["hipchat_api_url"],
   },
-  "templates" => node["alertmanager"]["templates"],
-  "receivers" => node["alertmanager"]["receivers"],
-  "route" => node["alertmanager"]["route"],
+  "route" => node["alertmanager"]["config"]["route"],
+  "inhibit_rules" => node["alertmanager"]["config"]["inhibit_rules"],
+  "receivers" => node["alertmanager"]["config"]["receivers"],
+  "templates" => node["alertmanager"]["config"]["templates"],
 }
 
 file "alertmanager config" do
