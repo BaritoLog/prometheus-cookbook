@@ -59,7 +59,7 @@ systemd_unit "trickster.service" do
             [Unit]
             Description=Prometheus Trickster
             After=network.target
-            Documentation=https://github.com/Comcast/trickster"
+            Documentation=https://github.com/Comcast/trickster
 
             [Service]
             Type=simple
