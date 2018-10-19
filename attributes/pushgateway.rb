@@ -12,4 +12,8 @@ default["pushgateway"]["binary"] = "#{node["pushgateway"]["dir"]}/pushgateway"
 # Pushgateway version
 default["pushgateway"]["version"] = "0.5.2"
 default["pushgateway"]["checksum"] = "d4aeb15b9667bae79170d4f12b4afa20dc29850aeac2ce071479d93057fb5c3b"
-default["pushgateway"]["binary_url"] = "https://github.com/prometheus/pushgateway/releases/download/v#{node['pushgateway']['version']}/pushgateway-#{node['pushgateway']['version']}.linux-amd64.tar.gz"
+default["pushgateway"]["binary_url"] = "https://github.com/prometheus/pushgateway/releases/download/v#{node["pushgateway"]["version"]}/pushgateway-#{node["pushgateway"]["version"]}.linux-amd64.tar.gz"
+
+# Pushgateway flags
+default["pushgateway"]["flags"]["web.listen-address"] = "0.0.0.0:9091"
+default["pushgateway"]["flags"]["persistence.file"] = ""

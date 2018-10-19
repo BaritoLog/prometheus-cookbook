@@ -41,7 +41,7 @@ systemd_unit "pushgateway.service" do
             After=network.target
 
             [Service]
-            ExecStart=/bin/bash -ce 'exec #{node["pushgateway"]["binary"]} >> "#{node["pushgateway"]["log_dir"]}/pushgateway.log" 2>&1'
+            ExecStart=/bin/bash -ce 'exec #{node["pushgateway"]["binary"]} #{Gitlab::Prometheus.kingpin_flags_for(node, "pushgateway")} >> "#{node["pushgateway"]["log_dir"]}/pushgateway.log" 2>&1'
             User=#{node["prometheus"]["user"]}
             Restart=always
 

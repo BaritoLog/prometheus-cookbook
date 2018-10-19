@@ -35,7 +35,7 @@ suites:
             ],
           },
           "scrape_configs": {
-            "prometheus_job": {
+            "prometheus": {
               "metrics_path": "/metrics",
               "static_configs": [
                 {
@@ -43,7 +43,7 @@ suites:
                 }
               ]
             },
-            "consul_job": {
+            "consul": {
               "scrape_interval": "15s",
               "consul_sd_configs": [
                 {
@@ -60,7 +60,7 @@ suites:
                 }
               ]
             },
-            "test_job": {
+            "test": {
               "scrape_interval": "15s",
               "relabel_configs": [
                 {
@@ -128,3 +128,15 @@ suites:
     verifier:
       inspec_tests:
         - test/integration/trickster
+  - name: node-exporter
+    run_list:
+      - recipe[prometheus::node_exporter]
+    verifier:
+      inspec_tests:
+        - test/integration/node_exporter
+  - name: blackbox-exporter
+    run_list:
+      - recipe[prometheus::blackbox_exporter]
+    verifier:
+      inspec_tests:
+        - test/integration/blackbox_exporter

@@ -11,7 +11,7 @@ default["trickster"]["binary_url"] = "https://github.com/Comcast/trickster/relea
 
 # Trickster directory
 default["trickster"]["dir"] = "#{node["prometheus"]["dir"]}/trickster"
-default["trickster"]["log_dir"] = "#{node["prometheus"]["log_dir"]}/trickster"
+default["trickster"]["log_dir"] = "#{node["prometheus"]["log_dir"]}"
 default["trickster"]["binary"] = "#{node["trickster"]["dir"]}/trickster"
 default["trickster"]["cache_dir"] = "#{node["trickster"]["dir"]}/cache"
 
