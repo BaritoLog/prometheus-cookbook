@@ -170,3 +170,9 @@ suites:
     verifier:
       inspec_tests:
         - test/integration/mysqld_exporter
+  - name: statsd-exporter
+    run_list:
+      - recipe[prometheus::statsd_exporter]
+    verifier:
+      inspec_tests:
+        - test/integration/statsd_exporter
