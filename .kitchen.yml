@@ -158,3 +158,9 @@ suites:
     verifier:
       inspec_tests:
         - test/integration/haproxy_exporter
+  - name: memcached-exporter
+    run_list:
+      - recipe[prometheus::memcached_exporter]
+    verifier:
+      inspec_tests:
+        - test/integration/memcached_exporter
