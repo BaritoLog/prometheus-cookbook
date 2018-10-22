@@ -176,3 +176,9 @@ suites:
     verifier:
       inspec_tests:
         - test/integration/statsd_exporter
+  - name: elasticsearch-exporter
+    run_list:
+      - recipe[prometheus::elasticsearch_exporter]
+    verifier:
+      inspec_tests:
+        - test/integration/elasticsearch_exporter
