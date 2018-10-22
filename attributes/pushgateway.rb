@@ -15,5 +15,4 @@ default["pushgateway"]["checksum"] = "d4aeb15b9667bae79170d4f12b4afa20dc29850aea
 default["pushgateway"]["binary_url"] = "https://github.com/prometheus/pushgateway/releases/download/v#{node["pushgateway"]["version"]}/pushgateway-#{node["pushgateway"]["version"]}.linux-amd64.tar.gz"
 
 # Pushgateway flags
-default["pushgateway"]["flags"]["web.listen-address"] = "0.0.0.0:9091"
 default["pushgateway"]["flags"]["persistence.file"] = ""
