@@ -182,3 +182,9 @@ suites:
     verifier:
       inspec_tests:
         - test/integration/elasticsearch_exporter
+  - name: postgres-exporter
+    run_list:
+      - recipe[prometheus::postgres_exporter]
+    verifier:
+      inspec_tests:
+        - test/integration/postgres_exporter
