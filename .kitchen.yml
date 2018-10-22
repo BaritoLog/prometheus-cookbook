@@ -164,3 +164,9 @@ suites:
     verifier:
       inspec_tests:
         - test/integration/memcached_exporter
+  - name: mysqld-exporter
+    run_list:
+      - recipe[prometheus::mysqld_exporter]
+    verifier:
+      inspec_tests:
+        - test/integration/mysqld_exporter
