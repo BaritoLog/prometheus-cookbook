@@ -140,3 +140,21 @@ suites:
     verifier:
       inspec_tests:
         - test/integration/blackbox_exporter
+  - name: consul-exporter
+    run_list:
+      - recipe[prometheus::consul_exporter]
+    verifier:
+      inspec_tests:
+        - test/integration/consul_exporter
+  - name: graphite-exporter
+    run_list:
+      - recipe[prometheus::graphite_exporter]
+    verifier:
+      inspec_tests:
+        - test/integration/graphite_exporter
+  - name: haproxy-exporter
+    run_list:
+      - recipe[prometheus::haproxy_exporter]
+    verifier:
+      inspec_tests:
+        - test/integration/haproxy_exporter
