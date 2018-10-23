@@ -200,10 +200,9 @@ suites:
     verifier:
       inspec_tests:
         - test/integration/kafka_exporter
-    attributes: {
-      "kafka_exporter": {
-        "flags": {
-          "kafka.server": "172.28.23.103:9092"
-        }
-      }
-    }
+  - name: fluentd-exporter
+    run_list:
+      - recipe[prometheus::fluentd_exporter]
+    verifier:
+      inspec_tests:
+        - test/integration/fluentd_exporter

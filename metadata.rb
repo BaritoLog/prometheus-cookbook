@@ -11,3 +11,4 @@ issues_url 'https://github.com/BaritoLog/prometheus-cookbook/issues'
 source_url 'https://github.com/BaritoLog/prometheus-cookbook'
 
 depends "ark", "~> 3.1"
+depends "logrotate", "~> 2.2.0"

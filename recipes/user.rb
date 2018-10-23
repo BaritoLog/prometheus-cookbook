@@ -25,3 +25,9 @@ directory node["prometheus"]["log_dir"] do
   mode "0755"
   recursive true
 end
+
+logrotate_app "prometheus" do
+  path "/var/log/prometheus/*.log"
+  frequency "daily"
+  rotate 7
+end
