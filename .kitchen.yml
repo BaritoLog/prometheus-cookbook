@@ -188,3 +188,9 @@ suites:
     verifier:
       inspec_tests:
         - test/integration/postgres_exporter
+  - name: redis-exporter
+    run_list:
+      - recipe[prometheus::redis_exporter]
+    verifier:
+      inspec_tests:
+        - test/integration/redis_exporter
