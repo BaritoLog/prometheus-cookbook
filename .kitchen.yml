@@ -194,3 +194,16 @@ suites:
     verifier:
       inspec_tests:
         - test/integration/redis_exporter
+  - name: kafka-exporter
+    run_list:
+      - recipe[prometheus::kafka_exporter]
+    verifier:
+      inspec_tests:
+        - test/integration/kafka_exporter
+    attributes: {
+      "kafka_exporter": {
+        "flags": {
+          "kafka.server": "172.28.23.103:9092"
+        }
+      }
+    }
