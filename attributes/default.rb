@@ -9,8 +9,8 @@ default["prometheus"]["user"] = "prometheus"
 default["prometheus"]["group"] = "prometheus"
 
 # Prometheus version
-default["prometheus"]["version"] = "2.4.3"
-default["prometheus"]["checksum"] = "3aa063498ab3b4d1bee103d80098ba33d02b3fed63cb46e47e1d16290356db8a"
+default["prometheus"]["version"] = "2.11.1"
+default["prometheus"]["checksum"] = "50b5f4dfd3f358518c1aaa3bd7df2e90780bdb5292b5c996137c2b1e81102390"
 default["prometheus"]["binary_url"] = "https://github.com/prometheus/prometheus/releases/download/v#{node["prometheus"]["version"]}/prometheus-#{node["prometheus"]["version"]}.linux-amd64.tar.gz"
 
 # Prometheus configuration repository

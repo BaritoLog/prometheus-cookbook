@@ -10,8 +10,8 @@ default["node_exporter"]["log_dir"] = "#{node["prometheus"]["log_dir"]}"
 default["node_exporter"]["binary"] = "#{node["node_exporter"]["dir"]}/node_exporter"
 
 # Node Exporter version
-default["node_exporter"]["version"] = "0.16.0"
-default["node_exporter"]["checksum"] = "e92a601a5ef4f77cce967266b488a978711dabc527a720bea26505cba426c029"
+default["node_exporter"]["version"] = "0.18.1"
+default["node_exporter"]["checksum"] = "b2503fd932f85f4e5baf161268854bf5d22001869b84f00fd2d1f57b51b72424"
 default["node_exporter"]["binary_url"] = "https://github.com/prometheus/node_exporter/releases/download/v#{node["node_exporter"]["version"]}/node_exporter-#{node["node_exporter"]["version"]}.linux-amd64.tar.gz"
 
 # Node Exporter flags

@@ -10,8 +10,8 @@ default["mysqld_exporter"]["log_dir"] = "#{node["prometheus"]["log_dir"]}"
 default["mysqld_exporter"]["binary"] = "#{node["mysqld_exporter"]["dir"]}/mysqld_exporter"
 
 # Mysqld Exporter version
-default["mysqld_exporter"]["version"] = "0.11.0"
-default["mysqld_exporter"]["checksum"] = "b53ad48ff14aa891eb6a959730ffc626db98160d140d9a66377394714c563acf"
+default["mysqld_exporter"]["version"] = "0.12.1"
+default["mysqld_exporter"]["checksum"] = "133b0c281e5c6f8a34076b69ade64ab6cac7298507d35b96808234c4aa26b351"
 default["mysqld_exporter"]["binary_url"] = "https://github.com/prometheus/mysqld_exporter/releases/download/v#{node["mysqld_exporter"]["version"]}/mysqld_exporter-#{node["mysqld_exporter"]["version"]}.linux-amd64.tar.gz"
 
 # Mysqld Exporter config

@@ -5,8 +5,8 @@
 # Copyright:: 2018, BaritoLog.
 
 # Trickster version
-default["trickster"]["version"] = "0.1.1"
-default["trickster"]["checksum"] = "6b77bd4e1e3a3709a004a6f432395e413d938c0a255b42d05863570dca08d593"
+default["trickster"]["version"] = "0.1.10"
+default["trickster"]["checksum"] = "a33aeb3c5243b067f9ede0c250997825b5a244631b9c4a07dde86a387b4fd809"
 default["trickster"]["binary_url"] = "https://github.com/Comcast/trickster/releases/download/v#{node["trickster"]["version"]}/trickster-#{node["trickster"]["version"]}.linux-amd64.gz"
 
 # Trickster directory

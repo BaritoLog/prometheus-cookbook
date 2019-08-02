@@ -10,8 +10,8 @@ default["alertmanager"]["log_dir"] = "#{node["prometheus"]["log_dir"]}"
 default["alertmanager"]["binary"] = "#{node["alertmanager"]["dir"]}/alertmanager"
 
 # Alertmanager version
-default["alertmanager"]["version"] = "0.15.2"
-default["alertmanager"]["checksum"] = "79ee23ab2f0444f592051995728ba9e0a7547cc3b9162301e3152dbeaf568d2e"
+default["alertmanager"]["version"] = "0.18.0"
+default["alertmanager"]["checksum"] = "5f17155d669a8d2243b0d179fa46e609e0566876afd0afb09311a8bc7987ab15"
 default["alertmanager"]["binary_url"] = "https://github.com/prometheus/alertmanager/releases/download/v#{node["alertmanager"]["version"]}/alertmanager-#{node["alertmanager"]["version"]}.linux-amd64.tar.gz"
 
 # Alertmanager flags

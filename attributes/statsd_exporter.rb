@@ -10,8 +10,8 @@ default["statsd_exporter"]["log_dir"] = "#{node["prometheus"]["log_dir"]}"
 default["statsd_exporter"]["binary"] = "#{node["statsd_exporter"]["dir"]}/statsd_exporter"
 
 # Statsd Exporter version
-default["statsd_exporter"]["version"] = "0.8.0"
-default["statsd_exporter"]["checksum"] = "0ebd079b0c7f25003fc554957ca76c5941979e70b527a2626d04392b6b9b7715"
+default["statsd_exporter"]["version"] = "0.12.2"
+default["statsd_exporter"]["checksum"] = "9976810ae7a0e3593d6727d46d8c45a23f534e5794de816ed8309a42bb86cb34"
 default["statsd_exporter"]["binary_url"] = "https://github.com/prometheus/statsd_exporter/releases/download/v#{node["statsd_exporter"]["version"]}/statsd_exporter-#{node["statsd_exporter"]["version"]}.linux-amd64.tar.gz"
 
 # Statsd Exporter config

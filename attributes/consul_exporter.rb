@@ -10,8 +10,8 @@ default["consul_exporter"]["log_dir"] = "#{node["prometheus"]["log_dir"]}"
 default["consul_exporter"]["binary"] = "#{node["consul_exporter"]["dir"]}/consul_exporter"
 
 # Consul Exporter version
-default["consul_exporter"]["version"] = "0.4.0"
-default["consul_exporter"]["checksum"] = "ff77c03de67cf381f67480b5be6699901785a34145c518c3484ae3e5b8440d08"
+default["consul_exporter"]["version"] = "0.5.0"
+default["consul_exporter"]["checksum"] = "4592b3e0e1b1f1ed18bd2a95a19016feb081bb0eb304d6e48cbbae030aee7805"
 default["consul_exporter"]["binary_url"] = "https://github.com/prometheus/consul_exporter/releases/download/v#{node["consul_exporter"]["version"]}/consul_exporter-#{node["consul_exporter"]["version"]}.linux-amd64.tar.gz"
 
 # Consul Exporter flags
