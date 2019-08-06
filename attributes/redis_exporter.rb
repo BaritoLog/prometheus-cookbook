@@ -16,3 +16,4 @@ default["redis_exporter"]["binary_url"] = "https://github.com/oliver006/redis_ex
 
 # Redis Exporter flags
 default["redis_exporter"]["flags"]["log-format"] = "txt"
+default["redis_exporter"]["flags"]["redis.addr"] = "redis://#{node['ipaddress']}:6379"
