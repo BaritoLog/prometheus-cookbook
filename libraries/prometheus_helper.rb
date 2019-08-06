@@ -8,7 +8,7 @@ module Gitlab
         elsif flag_value == false
           config += "--no-#{flag_key} "
         else
-          config += "--#{flag_key}='#{flag_value}' " unless flag_value.empty?
+          config += "--#{flag_key}=\"#{flag_value}\" " unless flag_value.empty?
         end
       end
       config
@@ -17,7 +17,7 @@ module Gitlab
     def self.flags_for(node, service)
       config = ""
       node[service]["flags"].each do |flag_key, flag_value|
-        config += "-#{flag_key}=#{flag_value} " unless flag_value.empty?
+        config += "-#{flag_key}=\"#{flag_value}\" " unless flag_value.empty?
       end
       config
     end
