@@ -16,3 +16,4 @@ default["haproxy_exporter"]["binary_url"] = "https://github.com/prometheus/hapro
 
 # Haproxy Exporter flags
 default["haproxy_exporter"]["flags"]["log.level"] = "info"
+default["haproxy_exporter"]["flags"]["haproxy.ssl-verify"] = "false"
