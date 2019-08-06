@@ -17,3 +17,4 @@ default["haproxy_exporter"]["binary_url"] = "https://github.com/prometheus/hapro
 # Haproxy Exporter flags
 default["haproxy_exporter"]["flags"]["log.level"] = "info"
 default["haproxy_exporter"]["flags"]["haproxy.ssl-verify"] = false
+default["haproxy_exporter"]["flags"]["haproxy.scrape-uri"] = "http://#{node["ipaddress"]}:1936/stats;csv"
