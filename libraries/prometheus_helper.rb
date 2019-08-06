@@ -8,7 +8,7 @@ module Gitlab
         elsif flag_value == false
           config += "--no-#{flag_key} "
         else
-          config += "--#{flag_key}=#{flag_value} " unless flag_value.empty?
+          config += "--#{flag_key}='#{flag_value}' " unless flag_value.empty?
         end
       end
       config
