@@ -26,7 +26,6 @@ log node["redis_exporter"]["dir"]
 
 # Download prometheus redis_exporter binary & unpack
 ark ::File.basename(node["redis_exporter"]["dir"]) do
-  strip_components 0
   url node["redis_exporter"]["binary_url"]
   checksum node["redis_exporter"]["checksum"]
   version node["redis_exporter"]["version"]
