@@ -12,7 +12,6 @@ default["pathfinder_discovery"]["pathfinder_containers_path"] = "/api/v2/ext_app
 default["pathfinder_discovery"]["pathfinder_nodes_path"] = "/api/v1/ext_app/nodes"
 default["pathfinder_discovery"]["pathfinder_token"] = ""
 
-
 #Port
 default["pathfinder_discovery"]["zookeeper_port"] = "8080"
 default["pathfinder_discovery"]["kafka_port"] = "8181"
@@ -25,7 +24,7 @@ default["pathfinder_discovery"]["barito_app_port"] = "3000"
 default["pathfinder_discovery"]["postgres_port"] = "9187"
 default["pathfinder_discovery"]["redis_port"] = "9121"
 
-default["pathfinder_discovery"]["pathfinder_cluster"] = ["barito-worker"]
+default["pathfinder_discovery"]["pathfinder_cluster"] = []
 default["pathfinder_discovery"]["pathfinder_scrape_type"] = {
     "container" => "target_container.json",
     "nodes" => "target_node.json"
