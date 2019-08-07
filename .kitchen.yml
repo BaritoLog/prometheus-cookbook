@@ -208,3 +208,9 @@ suites:
     verifier:
       inspec_tests:
         - test/integration/fluentd_exporter
+  - name: pathfinder-discovery
+    run_list:
+      - recipe[prometheus::pathfinder_discovery]
+    verifier:
+      inspec_tests:
+        - test/integration/pathfinder_discovery
