@@ -37,7 +37,7 @@ puts node["pathfinder_discovery"]["pathfinder_cluster"]
 node["pathfinder_discovery"]["pathfinder_cluster"].each do |cluster_name| 
   node["pathfinder_discovery"]["pathfinder_scrape_type"].each do |key,value| 
     path = key == 'container' ?  node["pathfinder_discovery"]["pathfinder_containers_path"] : node["pathfinder_discovery"]["pathfinder_nodes_path"]
-    cron "scheduling-pathfinder-#{key}" do
+    cron "scheduling-pathfinder-#{cluster_name}-#{key}" do
       minute 5
       user node["prometheus"]["user"]
       command "curl -s '#{node["pathfinder_discovery"]["pathfinder_url"]}#{path}?cluster_name=#{cluster_name}' -H 'X-Auth-Token: #{node["pathfinder_discovery"]["pathfinder_token"]}' | ruby #{node["pathfinder_discovery"]["dir"]}/container_parser.rb | jq '.' > #{node["pathfinder_discovery"]["dir"]}/#{cluster_name}_#{value}"
