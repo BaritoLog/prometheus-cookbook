@@ -13,13 +13,13 @@ default["pathfinder_discovery"]["pathfinder_nodes_path"] = "/api/v1/ext_app/node
 default["pathfinder_discovery"]["pathfinder_token"] = ""
 
 #Port
-default["pathfinder_discovery"]["zookeeper_port"] = "8080"
-default["pathfinder_discovery"]["kafka_port"] = "8181"
+default["pathfinder_discovery"]["zookeeper_port"] = "9141"
+default["pathfinder_discovery"]["kafka_port"] = "9308"
 default["pathfinder_discovery"]["kibana_port"] = "5601"
 default["pathfinder_discovery"]["barito_flow_consumer_port"] = "9999"
 default["pathfinder_discovery"]["barito_flow_producer_port"] = "7777"
 default["pathfinder_discovery"]["consul_port"] = "9107"
-default["pathfinder_discovery"]["elasticsearch_port"] = "9114"
+default["pathfinder_discovery"]["elasticsearch_port"] = "9108"
 default["pathfinder_discovery"]["barito_app_port"] = "3000"
 default["pathfinder_discovery"]["postgres_port"] = "9187"
 default["pathfinder_discovery"]["redis_port"] = "9121"
