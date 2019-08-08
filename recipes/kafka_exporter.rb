@@ -44,6 +44,7 @@ systemd_unit "kafka_exporter.service" do
             ExecStart=/bin/bash -ce 'exec #{node["kafka_exporter"]["binary"]} #{Gitlab::Prometheus.kingpin_flags_for(node, "kafka_exporter")} >> "#{node["kafka_exporter"]["log_dir"]}/kafka_exporter.log" 2>&1'
             User=#{node["prometheus"]["user"]}
             Restart=always
+            RestartSec=10
 
             [Install]
             WantedBy=multi-user.target
