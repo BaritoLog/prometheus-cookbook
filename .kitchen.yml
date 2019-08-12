@@ -214,3 +214,9 @@ suites:
     verifier:
       inspec_tests:
         - test/integration/pathfinder_discovery
+  - name: zookeeper-exporter
+    run_list:
+      - recipe[prometheus::zookeeper_exporter]
+    verifier:
+      inspec_tests:
+        - test/integration/zookeeper_exporter
