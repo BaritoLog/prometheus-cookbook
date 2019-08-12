@@ -50,7 +50,7 @@ end
 raw = JSON.parse(lines)
 group_bucket = {}
 raw['data']['items'].each do |c|
-  next if c['status'] != 'PROVISIONED'
+  next unless ["PROVISIONED", "BOOTSTRAPPED"].include? c['status']
 
   hostname = c['hostname']
   ip = c['ipaddress']
