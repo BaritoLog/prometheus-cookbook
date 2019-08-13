@@ -221,6 +221,10 @@ suites:
       inspec_tests:
         - test/integration/zookeeper_exporter
   - name: kibana-exporter
+    driver:
+      customize:
+        memory: 4096
+        cpus: 2
     run_list:
       - recipe[kibana_wrapper_cookbook::default]
       - recipe[prometheus::kibana_exporter]
