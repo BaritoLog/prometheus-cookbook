@@ -2,11 +2,11 @@ control "kibana_exporter install" do
   impact 1.0
   title "Tests Prometheus Kibana Exporter Installation"
 
-  describe directory("/opt/kibana/current/plugins/kibana-prometheus-exporter/") do
+  describe directory("/opt/kibana/6.3.0/current/plugins/kibana-prometheus-exporter/") do
     its("mode") { should cmp "0755" }
   end
 
-  describe directory("/opt/kibana/current/plugins/kibana-prometheus-exporter/") do
+  describe directory("/opt/kibana/6.3.0/current/plugins/kibana-prometheus-exporter/") do
     its("owner") {should eq "root" } 
   end
 
