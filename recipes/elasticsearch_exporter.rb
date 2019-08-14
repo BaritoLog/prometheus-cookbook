@@ -41,7 +41,7 @@ systemd_unit "elasticsearch_exporter.service" do
             After=network.target
 
             [Service]
-            ExecStart=/bin/bash -ce 'exec #{node["elasticsearch_exporter"]["binary"]} #{Gitlab::Prometheus.flags_for(node, "elasticsearch_exporter")} >> "#{node["elasticsearch_exporter"]["log_dir"]}/elasticsearch_exporter.log" 2>&1'
+            ExecStart=/bin/bash -ce 'exec #{node["elasticsearch_exporter"]["binary"]} #{Gitlab::Prometheus.kingpin_flags_for(node, "elasticsearch_exporter")} >> "#{node["elasticsearch_exporter"]["log_dir"]}/elasticsearch_exporter.log" 2>&1'
             User=#{node["prometheus"]["user"]}
             Restart=always
 
