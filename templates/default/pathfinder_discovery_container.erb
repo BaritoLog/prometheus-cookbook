@@ -6,6 +6,8 @@ ports = {
         "kibana" => '<%= node["pathfinder_discovery"]["kibana_port"] %>',
         "barito-flow-consumer" => '<%= node["pathfinder_discovery"]["barito_flow_consumer_port"] %>',
         "barito-flow-producer" => '<%= node["pathfinder_discovery"]["barito_flow_producer_port"] %>',
+        "barito-market-db" => '<%= node["pathfinder_discovery"]["postgres_port"] %>',
+        "barito-market-redis" => '<%= node["pathfinder_discovery"]["redis_port"] %>',
         "consul" => '<%= node["pathfinder_discovery"]["consul_port"] %>',
         "elasticsearch" => '<%= node["pathfinder_discovery"]["elasticsearch_port"] %>',
         "app" => '<%= node["pathfinder_discovery"]["barito_app_port"] %>',
@@ -38,7 +40,7 @@ def get_target_path(app_group, app_type)
   if app_type == "kibana"
     "/#{app_group}/_prometheus/metrics"
   else
-    ''
+    '/metrics'
   end
 end
 
@@ -68,11 +70,13 @@ result = []
 group_bucket.each do |key, ips|
   app_group = key[0]
   app_type = key[1]
+  next if ["barito-flow-consumer", "barito-flow-producder", "kibana", "barito-router-app", "barito-viewer-app", "barito-curator", "kafka-manager"].include? app_type
   port = ports[app_type]
   result.push({
     "labels" => {
       "app_group" => app_group,
-      "job" => app_type
+      "job" => app_type,
+      "__metrics_path__" => "#{get_target_path(app_group, app_type)}"
     },
   "targets" => ips.map{ |ip| "#{ip}:#{port}#{get_target_path(app_group, app_type)}"}
   })
