@@ -78,7 +78,7 @@ group_bucket.each do |key, ips|
       "job" => app_type,
       "__metrics_path__" => "#{get_target_path(app_group, app_type)}"
     },
-  "targets" => ips.map{ |ip| "#{ip}:#{port}#{get_target_path(app_group, app_type)}"}
+  "targets" => ips.map{ |ip| "#{ip}:#{port}"}
   })
 end
 puts result.to_json
