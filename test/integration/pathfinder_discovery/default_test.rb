@@ -7,7 +7,7 @@ control "pathfinder_discovery setup" do
     end
   
     describe crontab("prometheus") do
-        its('minutes') { should cmp ['5', '5']}
+        its('minutes') { should cmp ['*/5', '*/5']}
     end
   end
   
