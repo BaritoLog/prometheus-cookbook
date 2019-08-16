@@ -12,5 +12,4 @@ source_url 'https://github.com/BaritoLog/prometheus-cookbook'
 
 depends "ark", "~> 3.1"
 depends "logrotate", "~> 2.2.0"
-depends "barito_market"
 depends "cron", "~> 6.2.1"
