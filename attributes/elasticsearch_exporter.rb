@@ -21,3 +21,4 @@ default["elasticsearch_exporter"]["flags"]["es.indices_settings"] = true
 default["elasticsearch_exporter"]["flags"]["es.cluster_settings"] = true
 default["elasticsearch_exporter"]["flags"]["es.shards"] = true
 default["elasticsearch_exporter"]["flags"]["es.snapshots"] = true
+default["elasticsearch_exporter"]["flags"]["es.uri"] = "http://#{node["ipaddress"]}:9200"
