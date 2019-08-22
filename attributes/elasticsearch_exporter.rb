@@ -15,7 +15,7 @@ default["elasticsearch_exporter"]["checksum"] = "1d2444d7cbf321cb31d58d2fecc08c8
 default["elasticsearch_exporter"]["binary_url"] = "https://github.com/justwatchcom/elasticsearch_exporter/releases/download/v#{node["elasticsearch_exporter"]["version"]}/elasticsearch_exporter-#{node["elasticsearch_exporter"]["version"]}.linux-amd64.tar.gz"
 
 # Elasticsearch Exporter flags
-default["elasticsearch_exporter"]["flags"]["es.timeout"] = "5s"
+default["elasticsearch_exporter"]["flags"]["es.timeout"] = "15s"
 default["elasticsearch_exporter"]["flags"]["es.indices"] = true
 default["elasticsearch_exporter"]["flags"]["es.indices_settings"] = true
 default["elasticsearch_exporter"]["flags"]["es.cluster_settings"] = true
