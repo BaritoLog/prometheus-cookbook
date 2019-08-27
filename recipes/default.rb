@@ -104,4 +104,5 @@ end
 
 service "prometheus" do
   action %i(enable start)
+  restart_command "(systemctl | grep prome | grep active ) && curl -X POST http://localhost:9090/-/reload || systemctl restart prometheus"
 end
