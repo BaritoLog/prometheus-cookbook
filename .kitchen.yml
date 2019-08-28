@@ -225,6 +225,12 @@ suites:
     verifier:
       inspec_tests:
         - test/integration/zookeeper_exporter
+  - name: zfs-exporter
+    run_list:
+      - recipe[prometheus::zfs_exporter]
+    verifier:
+      inspec_tests:
+        - test/integration/zfs_exporter
   - name: kibana-exporter
     driver:
       customize:
