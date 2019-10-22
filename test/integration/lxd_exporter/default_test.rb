@@ -8,5 +8,6 @@ control "lxd_exporter install" do
 
   describe service("lxd_exporter") do
     it { should be_enabled }
+    it { should be_running }
   end
 end

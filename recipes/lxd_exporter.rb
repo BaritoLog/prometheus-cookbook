@@ -15,6 +15,7 @@ ark ::File.basename(node["lxd_exporter"]["dir"]) do
   owner node["prometheus"]["user"]
   group node["prometheus"]["group"]
   action :put
+  notifies :restart, "service[lxd_exporter]", :delayed
 end
 
 systemd_unit "lxd_exporter.service" do
@@ -32,4 +33,9 @@ systemd_unit "lxd_exporter.service" do
             WantedBy=multi-user.target
           END_UNIT
   action %i(create enable)
+  notifies :restart, "service[lxd_exporter]", :delayed
+end
+
+service "lxd_exporter" do
+  action %i(enable start)
 end
