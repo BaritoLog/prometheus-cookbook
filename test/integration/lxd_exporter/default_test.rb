@@ -11,6 +11,10 @@ control "lxd_exporter install" do
     it { should be_running }
   end
 
+  describe file("/etc/systemd/system/lxd_exporter.service") do
+    its("content") { should include "Environment=LXD_SOCKET=/var/snap/lxd/common/lxd/unix.socket" }
+  end
+
   describe port(9142) do
     it { should be_listening }
   end

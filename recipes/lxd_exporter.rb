@@ -25,6 +25,7 @@ systemd_unit "lxd_exporter.service" do
             After=network.target
 
             [Service]
+            Environment=LXD_SOCKET=#{node["lxd_exporter"]["lxd_socket"]}
             ExecStart=/bin/bash -ce 'exec #{node["lxd_exporter"]["binary"]} #{Gitlab::Prometheus.kingpin_flags_for(node, "lxd_exporter")} >> "#{node["lxd_exporter"]["log_dir"]}/lxd_exporter.log" 2>&1'
             User=#{node["prometheus"]["user"]}
             Restart=always
