@@ -6,6 +6,11 @@
 
 include_recipe "prometheus::user"
 
+group "lxd" do
+  append true
+  members "prometheus"
+end
+
 ark ::File.basename(node["lxd_exporter"]["dir"]) do
   url node["lxd_exporter"]["binary_url"]
   checksum node["lxd_exporter"]["checksum"]
