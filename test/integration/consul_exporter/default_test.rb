@@ -11,6 +11,7 @@ control "consul_exporter install" do
       should eq "root"
     end
     its("mode") { should cmp "0644" }
+    its("content") { should include '--consul.timeout="5s"' }
   end
 
   describe service("consul_exporter") do
