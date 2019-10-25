@@ -16,3 +16,4 @@ default["consul_exporter"]["binary_url"] = "https://github.com/prometheus/consul
 
 # Consul Exporter flags
 default["consul_exporter"]["flags"]["log.level"] = "info"
+default["consul_exporter"]["flags"]["consul.timeout"]="5s"
