@@ -70,7 +70,7 @@ result = []
 group_bucket.each do |key, ips|
   app_group = key[0]
   app_type = key[1]
-  next if ["barito-flow-consumer", "barito-flow-producer", "kibana", "barito-router-app", "barito-viewer-app", "barito-curator", "barito-market-app-02", "kafka-manager"].include? app_type
+  next if ["barito-flow-producer", "kibana", "barito-router-app", "barito-viewer-app", "barito-curator", "barito-market-app-02", "kafka-manager"].include? app_type
   port = ports[app_type]
   result.push({
     "labels" => {
