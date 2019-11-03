@@ -210,6 +210,7 @@ suites:
         - test/integration/fluentd_exporter
   - name: lxd-exporter
     run_list:
+      - recipe[pathfinder-node::first_node]
       - recipe[prometheus::lxd_exporter]
     verifier:
       inspec_tests:
