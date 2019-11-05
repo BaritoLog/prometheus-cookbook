@@ -18,7 +18,7 @@ ports = {
         "grafana" => '<%= node["pathfinder_discovery"]["grafana_port"] %>',
         }
 
-def get_app_group(s) 
+def get_app_group(s)
   groups = s.split("-")
   if groups[0] == 'p' || groups[0] == 'i'
     return groups[1]
@@ -27,7 +27,7 @@ def get_app_group(s)
   end
 end
 
-def get_app_type(s) 
+def get_app_type(s)
   groups = s.split("-")
   if groups[0] == 'p' || groups[0] == 'i'
     return groups[2..-2].join('-')
@@ -59,7 +59,7 @@ raw['data']['items'].each do |c|
   app_group = get_app_group(hostname)
   app_type = get_app_type(hostname)
   key = [app_group, app_type]
-  if group_bucket[key].nil? 
+  if group_bucket[key].nil?
     group_bucket[key] = [ip]
   else
     group_bucket[key].push(ip)
@@ -70,7 +70,7 @@ result = []
 group_bucket.each do |key, ips|
   app_group = key[0]
   app_type = key[1]
-  next if ["barito-flow-producer", "kibana", "barito-router-app", "barito-viewer-app", "barito-curator", "barito-market-app-02", "kafka-manager"].include? app_type
+  next if ["kibana", "barito-router-app", "barito-viewer-app", "barito-curator", "barito-market-app-02", "kafka-manager"].include? app_type
   port = ports[app_type]
   result.push({
     "labels" => {
