@@ -15,7 +15,7 @@ end
 execute 'plugin-install' do
   cwd node["kibana_exporter"]["kibana_base_dir"]
   command "bin/kibana-plugin install #{node["kibana_exporter"]["url"]}"
-  timeout 600
+  timeout 1800
   not_if {
     Plugin.exists?(node["kibana_exporter"]["kibana_base_dir"])
   }
