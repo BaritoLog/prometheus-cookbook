@@ -15,7 +15,8 @@ end
 execute 'plugin-install' do
   cwd node["kibana_exporter"]["kibana_base_dir"]
   command "NODE_OPTIONS='--max-old-space-size=4096' bin/kibana-plugin install #{node["kibana_exporter"]["url"]}"
-  timeout 3600
+  timeout 600
+  ignore_failure true
   not_if {
     Plugin.exists?(node["kibana_exporter"]["kibana_base_dir"])
   }
