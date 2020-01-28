@@ -34,6 +34,10 @@ ark ::File.basename(node["blackbox_exporter"]["dir"]) do
   notifies :restart, "service[blackbox_exporter]", :delayed
 end
 
+execute 'enable ICMP probe permission' do
+  command 'sudo setcap cap_net_raw+ep blackbox_exporter'
+end
+
 systemd_unit "blackbox_exporter.service" do
   content <<~END_UNIT
             [Unit]
