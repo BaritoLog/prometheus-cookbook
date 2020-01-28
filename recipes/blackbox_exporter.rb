@@ -35,7 +35,15 @@ ark ::File.basename(node["blackbox_exporter"]["dir"]) do
 end
 
 execute 'enable ICMP probe permission' do
+  cwd node["blackbox_exporter"]["dir"]
   command 'sudo setcap cap_net_raw+ep blackbox_exporter'
+end
+
+file node["blackbox_exporter"]["flags"]["config.file"] do
+  content node["blackbox_exporter"]["config_content"]
+  owner node["prometheus"]["user"]
+  group node["prometheus"]["group"]
+  mode "0755"
 end
 
 systemd_unit "blackbox_exporter.service" do
