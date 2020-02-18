@@ -54,6 +54,7 @@ systemd_unit "blackbox_exporter.service" do
 
             [Service]
             ExecStart=/bin/bash -ce 'exec #{node["blackbox_exporter"]["binary"]} #{Gitlab::Prometheus.kingpin_flags_for(node, "blackbox_exporter")} >> "#{node["blackbox_exporter"]["log_dir"]}/blackbox_exporter.log" 2>&1'
+            ExecReload=/bin/kill -HUP $MAINPID
             User=#{node["prometheus"]["user"]}
             Restart=always
 
