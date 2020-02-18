@@ -2,6 +2,9 @@
 
 This file is used to list changes made in each version of the blackbox-exporter-wrapper cookbook.
 
+## 0.1.5
+- Add notify reload on blackbox exporter config change
+
 ## 0.1.4
 - Add 'ExecReload' entry so systemd blackbox exporter reload command is available
 

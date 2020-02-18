@@ -44,6 +44,7 @@ file node["blackbox_exporter"]["flags"]["config.file"] do
   owner node["prometheus"]["user"]
   group node["prometheus"]["group"]
   mode "0755"
+  notifies :reload, "service[blackbox_exporter]", :delayed
 end
 
 systemd_unit "blackbox_exporter.service" do
