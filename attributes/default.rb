@@ -50,4 +50,4 @@ default["prometheus"]["flags"]["web.enable-lifecycle"] = true
 default["prometheus"]["flags"]["web.external-url"] = "https://#{node["fqdn"]}"
 default["prometheus"]["flags"]["storage.tsdb.path"] = "#{node["prometheus"]["dir"]}/data"
 default["prometheus"]["flags"]["storage.tsdb.retention"] = "90d"
-default["prometheus"]["flags"]["storage.tsdb.max-block-duration"] = "7d"
+default["prometheus"]["flags"]["storage.tsdb.max-block-duration"] = "2h"
