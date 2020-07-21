@@ -107,6 +107,14 @@ suites:
                     "targets": ["localhost:443"],
                   }
                 ]
+              },
+              {
+                "scheme": "https",
+                "static_configs": [
+                  {
+                    "targets": ["127.0.0.1:443"],
+                  }
+                ]
               }
             ],
           },
@@ -117,6 +125,17 @@ suites:
               "basic_auth": {
                 "username": "",
                 "password": ""
+              },
+              "queue_config": {
+                "max_samples_per_send": 5000
+              }
+            },
+            {
+              "url": "127.0.0.1:443/insert",
+              "remote_timeout": "30s",
+              "basic_auth": {
+                "username": "test",
+                "password": "test"
               },
               "queue_config": {
                 "max_samples_per_send": 5000

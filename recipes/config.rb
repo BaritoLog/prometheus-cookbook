@@ -1,4 +1,4 @@
-tls_dir = node['prometheus']['tls_certs_dir']
+
 
 # Copy configuration from different repository
 git "#{node["prometheus"]["dir"]}/#{node["prometheus"]["runbooks"]["repo_name"]}" do
@@ -34,8 +34,9 @@ directory node["prometheus"]["config"]["inventory_dir"] do
 end
 
 if node["prometheus"]["tls_certs"]["enabled"]
+  tls_dir = node['prometheus']['tls_certs_dir']
 
-  directory node["prometheus"]["tls_certs_dir"] do
+  directory tls_dir do
     owner node["prometheus"]["user"]
     group node["prometheus"]["group"]
     mode "0755"
@@ -63,19 +64,32 @@ if node["prometheus"]["tls_certs"]["enabled"]
     content node["prometheus"]["tls_certs"]["key_content"]
   end
 
-  node["prometheus"]["config"]["remote_write"].each do |config|
-    node.default["#{config}"]["ca_file"] = "#{tls_dir}/ca.crt"
-    node.default["#{config}"]["cert_file"] = "#{tls_dir}/client.crt"
-    node.default["#{config}"]["key_file"] = "#{tls_dir}/client.key"
-    node.default["#{config}"]["insecure_skip_verify"] = node["prometheus"]["tls_certs"]["insecure_skip_verify"]
+  remote_write = []
+  alertmanagers = []
+
+  node["prometheus"]["config"]["remote_write"].each do |c|
+    config = c.dup
+
+    config["ca_file"] = "#{tls_dir}/ca.crt"
+    config["cert_file"] = "#{tls_dir}/client.crt"
+    config["key_file"] = "#{tls_dir}/client.key"
+    config["insecure_skip_verify"] = node["prometheus"]["tls_certs"]["insecure_skip_verify"]
+
+    remote_write << config
   end
 
-  node["prometheus"]["config"]["alerting"]["alertmanagers"].each do |config|
-    node.default["#{config}"]["ca_file"] = "#{tls_dir}/ca.crt"
-    node.default["#{config}"]["cert_file"] = "#{tls_dir}/client.crt"
-    node.default["#{config}"]["key_file"] = "#{tls_dir}/client.key"
-    node.default["#{config}"]["insecure_skip_verify"] = node["prometheus"]["tls_certs"]["insecure_skip_verify"]
+  node["prometheus"]["config"]["alerting"]["alertmanagers"].each do |c|
+    config = c.dup
+
+    config["ca_file"] = "#{tls_dir}/ca.crt"
+    config["cert_file"] = "#{tls_dir}/client.crt"
+    config["key_file"] = "#{tls_dir}/client.key"
+    config["insecure_skip_verify"] = node["prometheus"]["tls_certs"]["insecure_skip_verify"]
+
+    alertmanagers << config
   end
+  node.override["prometheus"]["config"]["remote_write"] = remote_write
+  node.override["prometheus"]["config"]["alerting"]["alertmanagers"] = alertmanagers
 end
 
 config = {
