@@ -64,17 +64,17 @@ if node["prometheus"]["tls_certs"]["enabled"]
   end
 
   node["prometheus"]["config"]["remote_write"].each do |config|
-    config["ca_file"] = "#{tls_dir}/ca.crt"
-    config["cert_file"] = "#{tls_dir}/client.crt"
-    config["key_file"] = "#{tls_dir}/client.key"
-    config["insecure_skip_verify"] = node["prometheus"]["tls_certs"]["insecure_skip_verify"]
+    node.default["#{config}"]["ca_file"] = "#{tls_dir}/ca.crt"
+    node.default["#{config}"]["cert_file"] = "#{tls_dir}/client.crt"
+    node.default["#{config}"]["key_file"] = "#{tls_dir}/client.key"
+    node.default["#{config}"]["insecure_skip_verify"] = node["prometheus"]["tls_certs"]["insecure_skip_verify"]
   end
 
   node["prometheus"]["config"]["alerting"]["alertmanagers"].each do |config|
-    config["ca_file"] = "#{tls_dir}/ca.crt"
-    config["cert_file"] = "#{tls_dir}/client.crt"
-    config["key_file"] = "#{tls_dir}/client.key"
-    config["insecure_skip_verify"] = node["prometheus"]["tls_certs"]["insecure_skip_verify"]
+    node.default["#{config}"]["ca_file"] = "#{tls_dir}/ca.crt"
+    node.default["#{config}"]["cert_file"] = "#{tls_dir}/client.crt"
+    node.default["#{config}"]["key_file"] = "#{tls_dir}/client.key"
+    node.default["#{config}"]["insecure_skip_verify"] = node["prometheus"]["tls_certs"]["insecure_skip_verify"]
   end
 end
 
