@@ -29,7 +29,7 @@ default["prometheus"]["config"]["recording_rules_dir"] = "#{node["prometheus"]["
 default["prometheus"]["config"]["inventory_dir"] = "#{node["prometheus"]["dir"]}/inventory"
 
 # Prometheus configuration
-default["prometheus"]["tls_certs_dir"] = "/etc/prometheus/secrets"
+default["prometheus"]["tls_certs_dir"] = "/opt/prometheus/secrets"
 default["prometheus"]["tls_certs"]["enabled"] = false
 default["prometheus"]["tls_certs"]["insecure_skip_verify"] = false
 default["prometheus"]["tls_certs"]["ca_content"] = ""

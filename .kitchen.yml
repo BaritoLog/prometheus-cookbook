@@ -91,7 +91,7 @@ suites:
         - test/integration/prometheus
     attributes: {
       "prometheus": {
-        "tls_cert": {
+        "tls_certs": {
           "enabled": true,
           "ca_content": "ca_content_sample",
           "cert_content": "cert_content_sample",
