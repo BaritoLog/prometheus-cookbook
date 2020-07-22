@@ -29,6 +29,13 @@ default["prometheus"]["config"]["recording_rules_dir"] = "#{node["prometheus"]["
 default["prometheus"]["config"]["inventory_dir"] = "#{node["prometheus"]["dir"]}/inventory"
 
 # Prometheus configuration
+default["prometheus"]["tls_certs_dir"] = "/opt/prometheus/secrets"
+default["prometheus"]["tls_certs"]["enabled"] = false
+default["prometheus"]["tls_certs"]["insecure_skip_verify"] = false
+default["prometheus"]["tls_certs"]["ca_content"] = ""
+default["prometheus"]["tls_certs"]["cert_content"] = ""
+default["prometheus"]["tls_certs"]["key_content"] = ""
+
 default["prometheus"]["config"]["scrape_interval"] = "15s"
 default["prometheus"]["config"]["scrape_timeout"] = "10s"
 default["prometheus"]["config"]["evaluation_interval"] = "15s"
@@ -36,7 +43,7 @@ default["prometheus"]["config"]["external_labels"] = {}
 default["prometheus"]["config"]["remote_write"] = []
 default["prometheus"]["config"]["remote_read"] = []
 default["prometheus"]["config"]["scrape_configs"] = []
-default["prometheus"]["config"]["alerting"] = []
+default["prometheus"]["config"]["alerting"] = {}
 default["prometheus"]["config"]["rule_files"] = [
   File.join(node["prometheus"]["config"]["rules_dir"], "/*.yml"),
   File.join(node["prometheus"]["config"]["alerting_rules_dir"], "/*.yml"),
