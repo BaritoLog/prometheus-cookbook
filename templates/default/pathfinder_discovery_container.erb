@@ -19,12 +19,20 @@ ports = {
         }
 
 def get_app_group(s)
+  group = ""
   groups = s.split("-")
+  
   if groups[0] == 'p' || groups[0] == 'i'
-    return groups[1]
+    group = groups[1]
   else
-    return groups[0]
+    group = groups[0]
   end
+
+  if group == 'c'
+    group = "core"
+  end
+
+  return group
 end
 
 def get_app_type(s)
