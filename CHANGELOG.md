@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the blackbox-exporter-wrapper cookbook.
 
+## 0.1.8
+
+- Exclude barito market app from pathfinder discovery
+
 ## 0.1.7
 
 - Add additional labels for pathfinder discovery
