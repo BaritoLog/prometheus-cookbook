@@ -36,9 +36,9 @@ default["prometheus"]["tls_certs"]["ca_content"] = ""
 default["prometheus"]["tls_certs"]["cert_content"] = ""
 default["prometheus"]["tls_certs"]["key_content"] = ""
 
-default["prometheus"]["config"]["scrape_interval"] = "15s"
-default["prometheus"]["config"]["scrape_timeout"] = "10s"
-default["prometheus"]["config"]["evaluation_interval"] = "15s"
+default["prometheus"]["config"]["scrape_interval"] = "60s"
+default["prometheus"]["config"]["scrape_timeout"] = "30s"
+default["prometheus"]["config"]["evaluation_interval"] = "1m"
 default["prometheus"]["config"]["external_labels"] = {}
 default["prometheus"]["config"]["remote_write"] = []
 default["prometheus"]["config"]["remote_read"] = []
