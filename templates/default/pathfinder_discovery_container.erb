@@ -3,7 +3,6 @@ require 'json'
 ports = {
         "zookeeper" => '<%= node["pathfinder_discovery"]["zookeeper_port"] %>',
         "kafka" => '<%= node["pathfinder_discovery"]["kafka_port"] %>',
-        <%# "kibana" => '<%= node["pathfinder_discovery"]["kibana_port"] %>', %>
         "barito-flow-consumer" => '<%= node["pathfinder_discovery"]["barito_flow_consumer_port"] %>',
         "barito-flow-producer" => '<%= node["pathfinder_discovery"]["barito_flow_producer_port"] %>',
         "barito-market-db" => '<%= node["pathfinder_discovery"]["postgres_port"] %>',
@@ -15,7 +14,6 @@ ports = {
         "redis" => '<%= node["pathfinder_discovery"]["redis_port"] %>',
         "alertmanager" => '<%= node["pathfinder_discovery"]["alertmanager_port"] %>',
         "prometheus" => '<%= node["pathfinder_discovery"]["prometheus_port"] %>',
-        <%# "grafana" => '<%= node["pathfinder_discovery"]["grafana_port"] %>', %>
         }
 
 def get_app_group(s)
