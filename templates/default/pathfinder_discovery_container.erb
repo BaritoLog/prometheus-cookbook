@@ -80,6 +80,15 @@ group_bucket.each do |key, ips|
   ip = key[3]
   next if ["kibana", "barito-router-app", "barito-viewer-app", "barito-curator", "barito-market-app-01", "barito-market-app-02", "kafka-manager"].include? app_type
   port = ports[app_type]
+  
+  relabel = {}
+  if app_type == "barito-flow-consumer"
+    relabel = {
+      "source_labels" => ["error"],
+      "replacement" => "",
+    }
+  end
+
   result.push({
     "labels" => {
       "app_group" => app_group,
@@ -89,6 +98,7 @@ group_bucket.each do |key, ips|
       "name" => hostname,
       "__metrics_path__" => "#{get_target_path(app_group, app_type)}"
     },
+    "metric_relabel_configs" => relabel,
   "targets" => ips.map{ |ip| "#{ip}:#{port}"}
   })
 end
