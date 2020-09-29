@@ -31,7 +31,7 @@ remote_file node["promxy"]["binary"] do
   notifies :restart, "service[promxy]", :delayed
 end
 
-config = YAML::dump(node["promxy"]["config"])
+config = YAML::dump(node["promxy"]["config"].to_hash)
 
 file "promxy config" do
   path node["promxy"]["flags"]["config"]

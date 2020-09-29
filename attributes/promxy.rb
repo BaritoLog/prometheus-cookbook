@@ -18,8 +18,12 @@ default["promxy"]["config"] = {
         "server_groups" => [
             {
                 "static_configs" => [
-                    "localhost:9090",
-                    "localhost:9091"
+                    {
+                        "target": [
+                            "localhost:9090",
+                            "localhost:9091"
+                        ]
+                    }
                 ],
                 "ignore_error" => true
             }
