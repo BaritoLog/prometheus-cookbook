@@ -18,8 +18,8 @@ default["promxy"]["config"] = {
         "server_groups" => [
             {
                 "static_configs" => [
-                    "172.28.60.183:9090",
-                    "172.28.61.23:9090"
+                    "localhost:9090",
+                    "localhost:9091"
                 ],
                 "ignore_error" => true
             }
