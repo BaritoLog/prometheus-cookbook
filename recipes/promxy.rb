@@ -5,6 +5,7 @@
 # Copyright:: 2020, BaritoLog.
 
 include_recipe "prometheus::user"
+include_recipe "prometheus::config"
 
 # Create directory
 directory node["promxy"]["dir"] do
@@ -39,7 +40,7 @@ file "promxy config" do
   owner node["prometheus"]["user"]
   group node["prometheus"]["group"]
   mode "0644"
-  notifies :restart, "service[promxy]"
+  notifies :restart, "service[promxy]", :delayed
 end
 
 systemd_unit "promxy.service" do
@@ -63,4 +64,9 @@ end
 
 service "promxy" do
   action %i(enable start)
+end
+
+service 'promxy' do
+  subscribes :restart, "git[#{node["prometheus"]["dir"]}/#{node["prometheus"]["runbooks"]["repo_name"]}]", :delayed
+  only_if { ::File.exist?("/etc/systemd/system/promxy.service") }
 end

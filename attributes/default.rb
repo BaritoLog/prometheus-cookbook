@@ -15,7 +15,7 @@ default["prometheus"]["binary_url"] = "https://github.com/prometheus/prometheus/
 
 # Prometheus configuration repository
 default["prometheus"]["runbooks"]["repo_name"] = "runbooks"
-default["prometheus"]["runbooks"]["repo_url"] = "https://gitlab.com/gitlab-com/runbooks"
+default["prometheus"]["runbooks"]["repo_url"] = "https://github.com/BaritoLog/prometheus-runbooks"
 default["prometheus"]["runbooks"]["branch"] = "master"
 default["prometheus"]["runbooks"]["dir"] = ""
 

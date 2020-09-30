@@ -1,11 +1,9 @@
 
-
 # Copy configuration from different repository
 git "#{node["prometheus"]["dir"]}/#{node["prometheus"]["runbooks"]["repo_name"]}" do
   repository node["prometheus"]["runbooks"]["repo_url"]
   revision node["prometheus"]["runbooks"]["branch"]
   action :sync
-  notifies :restart, "service[prometheus]", :delayed
 end
 
 link node["prometheus"]["config"]["rules_dir"] do
@@ -116,5 +114,14 @@ file "Prometheus config" do
   owner node["prometheus"]["user"]
   group node["prometheus"]["group"]
   mode "0644"
-  notifies :restart, "service[prometheus]"
+end
+
+service 'prometheus' do
+  subscribes :restart, "file[#{node["prometheus"]["flags"]["config.file"]}]", :delayed
+  only_if { ::File.exist?("/etc/systemd/system/prometheus.service") }
+end
+
+service 'prometheus' do
+  subscribes :restart, "git[#{node["prometheus"]["dir"]}/#{node["prometheus"]["runbooks"]["repo_name"]}]", :delayed
+  only_if { ::File.exist?("/etc/systemd/system/prometheus.service") }
 end

@@ -365,3 +365,21 @@ suites:
     verifier:
       inspec_tests:
         - test/integration/promxy
+    attributes: {
+      "prometheus": {
+        "config": {
+          "alerting": {
+            "alertmanagers": [
+              {
+                "scheme": "http",
+                "static_configs": [
+                  {
+                    "targets": ["localhost:9093"],
+                  }
+                ]
+              }
+            ],
+          }
+        }
+      }
+    }

@@ -17,6 +17,13 @@ control "promxy install" do
     its("mode") { should cmp "0644" }
   end
 
+  describe file("/opt/prometheus/runbooks/rules/es.yml") do
+    its("owner") do
+      should eq "root"
+    end
+    its("mode") { should cmp "0644" }
+  end
+
   describe service("promxy") do
     it { should be_enabled }
     it { should be_running }
