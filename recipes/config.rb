@@ -4,6 +4,7 @@ git "#{node["prometheus"]["dir"]}/#{node["prometheus"]["runbooks"]["repo_name"]}
   repository node["prometheus"]["runbooks"]["repo_url"]
   revision node["prometheus"]["runbooks"]["branch"]
   action :sync
+  ignore_failure true
 end
 
 link node["prometheus"]["config"]["rules_dir"] do
