@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the blackbox-exporter-wrapper cookbook.
 
+## 0.4.0
+
+- Add coch recipe
+
 ## 0.3.0
 
 - Add victoriametrics single recipe
