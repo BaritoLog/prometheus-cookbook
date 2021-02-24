@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the blackbox-exporter-wrapper cookbook.
 
+## 0.4.2
+
+- Add missing variables on coch.service
+
 ## 0.4.1
 
 - Add arguments for coch-log-exporter
