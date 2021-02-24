@@ -48,7 +48,7 @@ systemd_unit "coch.service" do
 
             [Service]
             EnvironmentFile=-#{node["coch"]["root_dir"]}/.cochenv
-            ExecStart=#{node["coch"]["binary"]} \$COCH_LOG_EXPORTER_SOURCE_URL \$COCH_LOG_EXPORTER_LABELS \$COCH_LOG_EXPORTER_INTERVAL \$COCH_LOG_EXPORTER_LISTEN_ADDRESS
+            ExecStart=#{node["coch"]["binary"]} \$COCH_LOG_EXPORTER_SOURCE_URL \$COCH_LOG_EXPORTER_LABELS \$COCH_LOG_EXPORTER_INTERVAL \$COCH_LOG_EXPORTER_LISTEN_ADDRESS \$COCH_LOG_EXPORTER_COMPONENT_LIST \$COCH_LOG_EXPORTER_INDEX_LIST
             Restart=on-failure
 
             [Install]
