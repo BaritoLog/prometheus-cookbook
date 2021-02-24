@@ -26,12 +26,14 @@ ark ::File.basename(node["coch"]["dir"]) do
   notifies :restart, "service[coch]", :delayed
 end
 
-file "/opt/coch-log-exporter/.cochenv" do
+file '/opt/coch-log-exporter/.cochenv' do
   content <<~END_UNIT
-             COCH_LOG_EXPORTER_SOURCE_URL=-source-url=\"http://elasticsearch.service.consul:9200/conformance-checker-*/_search?size=10000\"
-             COCH_LOG_EXPORTER_LABELS=-labels=\"namespace_prefix, terraform_module_name, service_name, ansible_role, ansible_role_version, name\"
+             COCH_LOG_EXPORTER_COMPONENT_LIST=-component-list=\"#{node["coch"]["component_list"]}\"
+             COCH_LOG_EXPORTER_INDEX_LIST=-index-list=\"#{node["coch"]["index_list"]}\" 
+             COCH_LOG_EXPORTER_SOURCE_URL=-source-url=\"#{node["coch"]["source_url"]}\"
+             COCH_LOG_EXPORTER_LABELS=-labels=\"#{node["coch"]["labels"]}\"
              COCH_LOG_EXPORTER_INTERVAL=-interval=\"20\"
-	     COCH_LOG_EXPORTER_LISTEN_ADDRESS=-listen-address=\":8090\"
+             COCH_LOG_EXPORTER_LISTEN_ADDRESS=-listen-address=\":8090\"
              END_UNIT
   mode '0744'
   owner 'root'
