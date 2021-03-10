@@ -4,7 +4,7 @@ maintainer_email 'baritolog@go-jek.com'
 license 'Apache-2.0'
 description 'Installs/Configures prometheus & exporter'
 long_description 'Installs/Configures prometheus & exporter'
-version '0.4.2'
+version '0.4.3'
 chef_version '>= 12.14' if respond_to?(:chef_version)
 
 issues_url 'https://github.com/BaritoLog/prometheus-cookbook/issues'
