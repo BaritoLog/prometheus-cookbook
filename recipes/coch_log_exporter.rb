@@ -38,6 +38,7 @@ file '/opt/coch-log-exporter/.cochenv' do
   mode '0744'
   owner 'root'
   group 'root'
+  notifies :restart, "service[coch]", :delayed
 end
 
 systemd_unit "coch.service" do
@@ -56,7 +57,6 @@ systemd_unit "coch.service" do
             WantedBy=multi-user.target
             END_UNIT
   action %i(create enable)
-  notifies :restart, "service[coch]", :delayed
 end
 
 service "coch" do
